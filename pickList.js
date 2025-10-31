@@ -95,6 +95,7 @@ function scoreTeam(team) {
 }
 
 function rankTeams() {
+
     let unfiltered = addAllStatsToArray(matchData, "Team Number");
     let teams = unfiltered.filter((value, index) => unfiltered.indexOf(value) === index && value != "");
     teamstats = [];

@@ -7,7 +7,12 @@ function fetchMatchData(sheetName = 'Sheet1') {
     fetch(`${url}?${params}`)
         .then(res => res.json())
         .then(data => {
-            matchData = data
+            let matchData = [];
+            for(let match of data) {
+                if(match.Competition === document.getElementById("compSelect").value) {
+                    matchData.push(match)
+                }
+            }
             localStorage.matchData = JSON.stringify(matchData);
             console.log(matchData);
             initAnalysis();
