@@ -89,3 +89,7 @@ function sumArray(array) {
     
     return arraySum;
 }
+
+function avgArray(array) {
+    return sumArray(array) / array.length
+}

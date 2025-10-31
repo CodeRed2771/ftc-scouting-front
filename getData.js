@@ -1,4 +1,4 @@
-let matchData = [];
+let matchData = localStorage.matchData ? JSON.parse(localStorage.matchData) : [];
 let pitData = [];
 
 function fetchMatchData(sheetName = 'Sheet1') {
@@ -8,6 +8,7 @@ function fetchMatchData(sheetName = 'Sheet1') {
         .then(res => res.json())
         .then(data => {
             matchData = data
+            localStorage.matchData = JSON.stringify(matchData);
             console.log(matchData);
             initAnalysis();
         })
@@ -16,5 +17,7 @@ function fetchMatchData(sheetName = 'Sheet1') {
 fetchMatchData();
 
 function initAnalysis() {
-    autoLeave();
+    rankTeams();
 }
+
+initAnalysis();
