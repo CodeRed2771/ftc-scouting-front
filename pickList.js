@@ -89,8 +89,8 @@ function scoreTeam(team) {
 
     return [
         Math.round((parkpoints + autoLeavePoints + aopoints * 1.4 + acpoints + tcpoints + topoints + depotpoints * 0.8) * 100) / 100,
-        autoLeavePoints + aopoints + acpoints,
-        tcpoints + topoints + depotpoints + parkpoints
+        Math.round((autoLeavePoints + aopoints + acpoints) * 100) / 100,
+        Math.round((tcpoints + topoints + depotpoints + parkpoints) * 100) / 100
     ];
 }
 
@@ -112,9 +112,10 @@ function rankTeams() {
 function filterList(type) {
     document.getElementById("rankings").innerHTML = "";
     teamstats.sort((a, b) => b[type] - a[type])
-    for(let team of teamstats) {
+    for(let teami in teamstats) {
+        let team = teamstats[teami];
         document.getElementById("rankings").innerHTML += `
-            <div class="teamitem"><div>${team.team}</div><div>Suitability: ${team.suitability}</div><div>Auto Points: ${team.autoPoints}</div><div>Teleop Points: ${team.teleopPoints}</div><div><input type="checkbox" onclick="this.parentElement.parentElement.classList.toggle('strikethrough', this.checked)"></div></div>
+            <div class="teamitem"><div id="rank">${Number(teami) + 1}</div><div id="teamnumber">${team.team}</div><div>Suitability: ${team.suitability}</div><div>Auto Points: ${team.autoPoints}</div><div>Teleop Points: ${team.teleopPoints}</div><div><input type="checkbox" onclick="this.parentElement.parentElement.classList.toggle('strikethrough', this.checked)"></div></div>
         `
     }
 }
